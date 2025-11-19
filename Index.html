@@ -1,32 +1,159 @@
 <!DOCTYPE html>
-
-<html>
-
-
+<html lang="en">
 <head>
-
-
-
-
-
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>IDK COOL TITLE</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      overflow: hidden;
+      background-color: #e0f7fa;
+      position: relative;
+    }
+    .container {
+      text-align: center;
+      background: #fff;
+      border-radius: 10px;
+      padding: 20px;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      z-index: 10;
+    }
+    h1, p {
+      color: #00796b;
+    }
+    input[type="password"] {
+      padding: 10px;
+      width: 120px;
+      text-align: center;
+      font-size: 24px;
+      letter-spacing: 10px;
+      border: 2px solid #00796b;
+      border-radius: 5px;
+      margin-bottom: 10px;
+    }
+    button {
+      padding: 10px 20px;
+      border: none;
+      border-radius: 5px;
+      background: #00796b;
+      color: #fff;
+      font-size: 16px;
+      cursor: pointer;
+    }
+    button:hover {
+      background: #004d40;
+    }
+    #rotcoin-notis {
+      display: none;
+      position: absolute;
+      top: 0; left: 0;
+      width: 100%;
+      height: 100%;
+      pointer-events: none;
+    }
+    .noti {
+      position: absolute;
+      background: #b2dfdb;
+      border: 2px solid #00796b;
+      border-radius: 5px;
+      padding: 10px;
+      width: 180px;
+      font-size: 14px;
+      font-weight: bold;
+      text-align: center;
+      pointer-events: auto;
+      cursor: pointer;
+      opacity: 0;
+      animation: fadeIn 0.5s forwards;
+    }
+    .noti button {
+      margin-top: 10px;
+      background: #00796b;
+      color: #fff;
+      border: none;
+      border-radius: 5px;
+      padding: 5px 10px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .noti button:hover {
+      background: #004d40;
+    }
+    .exclamation {
+      position: absolute;
+      font-size: 50px;
+      color: red;
+      animation: heartAnimation 5s infinite;
+      z-index: -1;
+    }
+    @keyframes heartAnimation {
+      0% { transform: scale(0); opacity: 0; }
+      50% { transform: scale(1); opacity: 1; }
+      100% { transform: scale(0); opacity: 0; }
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
+    }
+    .heart { font-size: 20px; color: red; }
+  </style>
+  <script>
+    function createExclamations() {
+      for (let i = 0; i < 50; i++) {
+        const exclamation = document.createElement("div");
+        exclamation.classList.add("exclamation");
+        exclamation.innerHTML = "!";
+        exclamation.style.top = `${Math.random() * 100}%`;
+        exclamation.style.left = `${Math.random() * 100}%`;
+        document.body.appendChild(exclamation);
+      }
+    }
+    function checkPin() {
+      const pin = document.getElementById("pin").value;
+      if (pin === "macdemarco") {
+        document.getElementById("password-box").style.display = "none";
+        showRotCoinNotis();
+      } else {
+        alert("Incorrect PIN. Try again!");
+      }
+    }
+    function showRotCoinNotis() {
+      const notiContainer = document.getElementById("rotcoin-notis");
+      notiContainer.style.display = "block";
+      let i = 0;
+      const interval = setInterval(() => {
+        if (i >= 50) {
+          clearInterval(interval);
+        } else {
+          const noti = document.createElement("div");
+          noti.classList.add("noti");
+          noti.style.top = `${Math.random() * 80 + 10}%`;
+          noti.style.left = `${Math.random() * 80 + 10}%`;
+          noti.innerHTML = `I LOVE YOU<br><button onclick="()">Yes</button>`;
+          notiContainer.appendChild(noti);
+          const sound = new Audio('https://www.soundjay.com/button/beep-07.wav');
+          sound.play();
+          i++;
+        }
+      }, 75);
+    }
+    window.onload = createExclamations;
+  </script>
 </head>
-
-
-
-<title>Caelan Is gay</title>
-
-
 <body>
-
-
-<p1>💔🥀</p1>
-
-
+  <div class="container" id="password-box">
+    <h1>Enter the PIN</h1>
+    <p>Hint: Artist <span class="heart">&#10084;</span></p>
+    <input type="password" id="pin" maxlength="10" placeholder="****">
+    <br>
+    <button onclick="checkPin()">Unlock</button>
+  </div>
+  <div id="rotcoin-notis"></div>
 </body>
-
-
-
 </html>
-
-</html>
-
